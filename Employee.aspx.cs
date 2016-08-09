@@ -13,6 +13,8 @@ using System.Data.SqlClient;
 
 public partial class _Default : System.Web.UI.Page 
 {
+    EmployeeDBEntities entity = new EmployeeDBEntities();
+
     //bool bMode = true;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,46 +30,72 @@ public partial class _Default : System.Web.UI.Page
   
     void InsertEmployee()
     {
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
-        //con.ConnectionString = @"server=.\SQLEXPRESS;database=BR004;uid=sa;pwd=123456";
+        //SqlConnection con = new SqlConnection();
+        //con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
+        ////con.ConnectionString = @"server=.\SQLEXPRESS;database=BR004;uid=sa;pwd=123456";
 
-        con.Open();
-        //MessageBox.Show("success");
-        SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
-        string sql =
-        string.Format("INSERT INTO Employees VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7})",
-                            txtFullname.Text, txtDateOfBirth.Text, 
-                            RBLGender.SelectedValue, DDLNational.SelectedValue,
-                            txtPhone.Text, txtAddress.Text, 
-                            ddlQualification.SelectedValue,
-                             txtSalary.Text);
-        cmd.CommandText = sql;
-        cmd.ExecuteNonQuery();
-        con.Close();
+        //con.Open();
+        ////MessageBox.Show("success");
+        //SqlCommand cmd = new SqlCommand();
+        //cmd.Connection = con;
+        //string sql =
+        //string.Format("INSERT INTO Employees VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7})",
+        //                    txtFullname.Text, txtDateOfBirth.Text, 
+        //                    RBLGender.SelectedValue, DDLNational.SelectedValue,
+        //                    txtPhone.Text, txtAddress.Text, 
+        //                    ddlQualification.SelectedValue,
+        //                     txtSalary.Text);
+        //cmd.CommandText = sql;
+        //cmd.ExecuteNonQuery();
+        //con.Close();
 
+        Employee emp = new Employee();
+        emp.FullName = txtFullname.Text;
+        emp.DateOfBirth = DateTime.Parse(txtDateOfBirth.Text);
+        emp.Gender = RBLGender.SelectedValue;
+        emp.National = DDLNational.SelectedValue;
+        emp.Phone = txtPhone.Text;
+        emp.Address = txtAddress.Text;
+        emp.Qualification = ddlQualification.SelectedValue;
+        emp.Salary = decimal.Parse(txtSalary.Text);
+
+        entity.Employees.Add(emp);
+        entity.SaveChanges();
     }
     void UpdateEmployee()
     {
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
-        //con.ConnectionString = @"server=.\SQLEXPRESS;database=BR004;uid=sa;pwd=123456";
+        //SqlConnection con = new SqlConnection();
+        //con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
+        ////con.ConnectionString = @"server=.\SQLEXPRESS;database=BR004;uid=sa;pwd=123456";
 
-        con.Open();
-        //MessageBox.Show("success");
-        SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
+        //con.Open();
+        ////MessageBox.Show("success");
+        //SqlCommand cmd = new SqlCommand();
+        //cmd.Connection = con;
 
-        string sql =
-        string.Format("UPDATE Employees SET Fullname='{0}',DateOfBirth='{1}',Gender='{2}'," +
-           "[National]='{3}',Qualification='{4}',Address='{5}',Salary={6} WHERE ID={7}",
-                        txtFullname.Text, txtDateOfBirth.Text, RBLGender.SelectedValue, 
-                        DDLNational.Text,ddlQualification.Text, 
-                        txtAddress.Text,txtSalary.Text, lblID.Text);
-        cmd.CommandType = CommandType.Text;
-        cmd.CommandText = sql;
-        cmd.ExecuteNonQuery();
+        //string sql =
+        //string.Format("UPDATE Employees SET Fullname='{0}',DateOfBirth='{1}',Gender='{2}'," +
+        //   "[National]='{3}',Qualification='{4}',Address='{5}',Salary={6} WHERE ID={7}",
+        //                txtFullname.Text, txtDateOfBirth.Text, RBLGender.SelectedValue, 
+        //                DDLNational.Text,ddlQualification.Text, 
+        //                txtAddress.Text,txtSalary.Text, lblID.Text);
+        //cmd.CommandType = CommandType.Text;
+        //cmd.CommandText = sql;
+        //cmd.ExecuteNonQuery();
+
+        int id = int.Parse(lblID.Text);
+        Employee emp = entity.Employees.First(x => x.ID == id);
+
+        emp.FullName = txtFullname.Text;
+        emp.DateOfBirth = DateTime.Parse(txtDateOfBirth.Text);
+        emp.Gender = RBLGender.SelectedValue;
+        emp.National = DDLNational.SelectedValue;
+        emp.Phone = txtPhone.Text;
+        emp.Address = txtAddress.Text;
+        emp.Qualification = ddlQualification.SelectedValue;
+        emp.Salary = decimal.Parse(txtSalary.Text);
+
+        entity.SaveChanges();
 
     }
     void LoadEmployees()
@@ -86,7 +114,7 @@ public partial class _Default : System.Web.UI.Page
         //gvEmployees.DataSource = dt;
         //gvEmployees.DataBind();
 
-        EmployeeDBEntities entity = new EmployeeDBEntities();
+        
         gvEmployees.DataSource = entity.Employees.ToList();
         gvEmployees.DataBind();
         
@@ -158,7 +186,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        //InsertEmployee();
+        InsertEmployee();
         LoadEmployees();
 
         string msgScript = "<script>alert('Adding successful');</script>";
@@ -193,7 +221,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
-        //UpdateEmployee();
+        UpdateEmployee();
         LoadEmployees();
     }
     protected void gvEmployees_PageIndexChanging(object sender, GridViewPageEventArgs e)
