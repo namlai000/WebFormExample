@@ -4,8 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Untitled Page</title>
-    <%--    <SCRIPT LANGUAGE="JavaScript" SRC="http://www.mattkruse.com/javascript/calendarpopup/combined-compact/CalendarPopup.js"></SCRIPT>
---%>
+    <%--    <SCRIPT LANGUAGE="JavaScript" SRC="http://www.mattkruse.com/javascript/calendarpopup/combined-compact/CalendarPopup.js"></SCRIPT>--%>
 
     <%--<script language="JavaScript" src="js/CalendarPopup.js"></script>
 
