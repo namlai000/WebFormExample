@@ -29,7 +29,7 @@ public partial class _Default : System.Web.UI.Page
     void InsertEmployee()
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"server=.\SQLEXPRESS;database=EmployeeDB;uid=sa;pwd=zaq@123";
+        con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
         //con.ConnectionString = @"server=.\SQLEXPRESS;database=BR004;uid=sa;pwd=123456";
 
         con.Open();
@@ -51,7 +51,7 @@ public partial class _Default : System.Web.UI.Page
     void UpdateEmployee()
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"server=.\SQLEXPRESS;database=BR004;integrated security=true";
+        con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
         //con.ConnectionString = @"server=.\SQLEXPRESS;database=BR004;uid=sa;pwd=123456";
 
         con.Open();
@@ -73,7 +73,7 @@ public partial class _Default : System.Web.UI.Page
     void LoadEmployees()
     {
         SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"server=.\SQLEXPRESS;database=EmployeeDB;uid=sa;pwd=zaq@123";
+        con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
 
         SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Employees", con);
         DataTable dt = new DataTable("Employees");
