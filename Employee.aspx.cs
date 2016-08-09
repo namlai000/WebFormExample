@@ -72,18 +72,22 @@ public partial class _Default : System.Web.UI.Page
     }
     void LoadEmployees()
     {
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
+        //SqlConnection con = new SqlConnection();
+        //con.ConnectionString = @"server=.\SQLEXPRESS2014;database=EmployeeDB;uid=sa;pwd=namlai120";
 
-        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Employees", con);
-        DataTable dt = new DataTable("Employees");
-        da.Fill(dt);
+        //SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Employees", con);
+        //DataTable dt = new DataTable("Employees");
+        //da.Fill(dt);
 
-        gvEmployees.AutoGenerateSelectButton = true;
-        gvEmployees.AllowPaging = true;
-        //gvEmployees.PageSize = 5;
-        
-        gvEmployees.DataSource = dt;
+        //gvEmployees.AutoGenerateSelectButton = true;
+        //gvEmployees.AllowPaging = true;
+        ////gvEmployees.PageSize = 5;
+
+        //gvEmployees.DataSource = dt;
+        //gvEmployees.DataBind();
+
+        EmployeeDBEntities entity = new EmployeeDBEntities();
+        gvEmployees.DataSource = entity.Employees.ToList();
         gvEmployees.DataBind();
         
     }
