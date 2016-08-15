@@ -110,7 +110,7 @@
                 <td colspan="2">
                     <asp:Button ID="btnNew" runat="server" Text="New" Width="65px" />
                     <asp:Button ID="btnSave" runat="server" Text="Add" Width="63px" 
-                        onclick="btnSave_Click" />
+                        onclick="btnSave_Click2" />
                     <asp:Button ID="btnUpdate" runat="server" Text="Update" Width="68px" 
                         onclick="btnUpdate_Click" />
                     <asp:Button ID="btnReset" runat="server" Text="Reset" Width="68px" />

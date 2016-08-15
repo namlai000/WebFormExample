@@ -16,12 +16,14 @@ public partial class _Default : System.Web.UI.Page
     EmployeeDBEntities entity = new EmployeeDBEntities();
 
     //bool bMode = true;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         //LoadEmployees();
         if (this.IsPostBack == false)
         {
-        //        ViewState["bMode"] = true;
+            //ViewState["bMode"] = true;
+            ViewState.Add("bMode", true);
         ////    //ViewState["Search"] = "";
                 LoadEmployees();
         } 
@@ -137,13 +139,17 @@ public partial class _Default : System.Web.UI.Page
         //bool bMode = bool.Parse(txtMode.Text);
         if (bMode == true)//Insert
         {
-            InsertEmployee();
-            LoadEmployees();
+            //InsertEmployee();
+            //LoadEmployees();
+            string msgScript = "<script>alert('Adding successful');</script>";
+            Response.Write(msgScript);
         }
         else//Update
         {
-            UpdateEmployee();
-            LoadEmployees();
+            //UpdateEmployee();
+            //LoadEmployees();
+            string msgScript = "<script>alert('Update successful');</script>";
+            Response.Write(msgScript);
         }
     }
     
@@ -186,8 +192,8 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        InsertEmployee();
-        LoadEmployees();
+        //InsertEmployee();
+        //LoadEmployees();
 
         string msgScript = "<script>alert('Adding successful');</script>";
         //lblMsg.Text = msgScript;
@@ -214,6 +220,8 @@ public partial class _Default : System.Web.UI.Page
         ddlQualification.SelectedItem.Text = r.Cells[8].Text;
         
         txtSalary.Text = r.Cells[9].Text;
+
+        ViewState["bMode"] = false;
     }
     protected void txtFullname_TextChanged(object sender, EventArgs e)
     {
